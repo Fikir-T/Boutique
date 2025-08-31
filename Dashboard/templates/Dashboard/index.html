@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Dashboard</title>
+{% endblock %}
+{% block content %}
+<section>
+    <div>
+        <h1>Items created: {{items.count}}</h1>
+    </div>
+    <div>
+        <h1>Types of items available: {{categories.count}}</h1>
+    </div>
+    <div class="item-creation">
+        <form method="post" action="{% url 'dashboard:dashboard' %}">
+            {% csrf_token %}
+
+            <label for="item_name">Item Name:</label>
+            <input type="text" placeholder="Item Name" name="item_name"><br>
+
+            <label for="item_category">Item Category:</label>
+            <select name="item_category" id="item_category" required>
+                <option value="">-- Select a Category --</option>
+                {% for category in categories %}
+                <option value="{{ category.CategoryId }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select><br>
+            <label for="price">Price:</label>
+            <input type="number" name="price" step="0.01" required><br>
+            <label for="description">Description:</label>
+            <input type="text" name="description" maxlength="255"><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="item-creation">
+        <form method="post" action="{% url 'dashboard:category_creation' %}">
+            {% csrf_token %}
+            <label for="category_name">Category name:</label>
+            {{ form.category_name }} <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+
+    <!-- <div>
+        <form action="">
+             <input type="text" class="search" name="search" >
+             
+        </form>
+       
+    </div> -->
+</section>
+{% endblock content %}
