@@ -1,4 +1,5 @@
 media
 notifications
 circle.html
-main\static\main\style.css
+main/static/main/style.css
+DjangoBase/credentials.py
